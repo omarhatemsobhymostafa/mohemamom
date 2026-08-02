@@ -30,7 +30,7 @@ const weeksSchema = new mongoose.Schema({
 const WeeksModel = mongoose.model("Weeks" , weeksSchema)
 
 app.get("/weeksdata" , async(req,res)=>{
-    const WeeksData = await WeeksModel.find()
+    const WeeksData = await WeeksModel.find().limit(20)
 
     const normalizedWeeks = WeeksData
       .map((item) => {
