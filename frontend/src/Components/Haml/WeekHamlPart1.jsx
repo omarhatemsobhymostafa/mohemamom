@@ -8,29 +8,26 @@ export default function WeekHamlPart1() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadWeeks = async () => {
-      try {
-        const response = await fetch("https://mohema.onrender.com/weeksdata");
+  const fetchWeeks = async () => {
+    try {
+      const response = await fetch("https://mohema.onrender.com/weeksdata");
 
-        console.log(response.headers.get("content-type"));
-
-        const text = await response.text();
-        console.log(text); if (!response.ok) {
-          throw new Error("Failed to fetch weeks data");
-        }
-
-        const data = await response.json();
-        setWeeks(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error("Error loading week details:", error);
-        setWeeks([]);
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
       }
-    };
 
-    loadWeeks();
-  }, [id]);
+      const data = await response.json();
+
+      console.log("Weeks Data:", data);
+
+      setWeeks(Array.isArray(data) ? data : []);
+    } catch (error) {
+      console.error("Error loading weeks:", error);
+    }
+  };
+
+  fetchWeeks();
+}, []);
 
   const normalizedId = id?.startsWith("week_") ? id : `week_${id}`;
   const weekData = weeks.find((week) => week.weekNumber === normalizedId) || null;
