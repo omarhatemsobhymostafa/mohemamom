@@ -26,7 +26,7 @@ export async function loadWeeksData() {
     return pendingPromise;
   }
 
-  pendingPromise = fetch("/weeksdata")
+  pendingPromise = fetch("https://mohema.onrender.com/weeksdata")
     .then(async (response) => {
       if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status}`);
