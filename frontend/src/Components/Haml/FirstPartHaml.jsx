@@ -11,7 +11,7 @@ export default function FirstPartHaml() {
   useEffect(() => {
     const loadWeeks = async () => {
       try {
-        const response = await fetch("/weeksdata");
+        const response = await fetch("https://mohema.onrender.com/weeksdata");
         if (!response.ok) {
           throw new Error("Failed to fetch weeks data");
         }
