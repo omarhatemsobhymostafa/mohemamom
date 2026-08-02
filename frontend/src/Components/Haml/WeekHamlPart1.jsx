@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FirstPartHaml from "./FirstPartHaml";
+import { loadWeeksData } from "./weeksData";
 
 export default function WeekHamlPart1() {
   const { id } = useParams();
@@ -8,26 +9,30 @@ export default function WeekHamlPart1() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchWeeks = async () => {
-    try {
-      const response = await fetch("https://mohema.onrender.com/weeksdata");
+    let ignore = false;
 
-      if (!response.ok) {
-        throw new Error(`HTTP Error: ${response.status}`);
+    const fetchWeeks = async () => {
+      try {
+        const data = await loadWeeksData();
+        if (!ignore) {
+          setWeeks(Array.isArray(data) ? data : []);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error loading weeks:", error);
+        if (!ignore) {
+          setWeeks([]);
+          setLoading(false);
+        }
       }
+    };
 
-      const data = await response.json();
+    fetchWeeks();
 
-      console.log("Weeks Data:", data);
-
-      setWeeks(Array.isArray(data) ? data : []);
-    } catch (error) {
-      console.error("Error loading weeks:", error);
-    }
-  };
-
-  fetchWeeks();
-}, []);
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const normalizedId = id?.startsWith("week_") ? id : `week_${id}`;
   const weekData = weeks.find((week) => week.weekNumber === normalizedId) || null;

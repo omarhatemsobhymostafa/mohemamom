@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { loadWeeksData } from "./weeksData";
 
 export default function FirstPartHaml() {
   const location = useLocation();
@@ -9,39 +10,31 @@ export default function FirstPartHaml() {
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
+    let ignore = false;
+
     const loadWeeks = async () => {
       try {
-        const response = await fetch("https://mohema.onrender.com/weeksdata");
-        if (!response.ok) {
-          throw new Error("Failed to fetch weeks data");
+        const normalizedWeeks = await loadWeeksData();
+        if (!ignore) {
+          setWeeks(normalizedWeeks);
         }
-
-        const data = await response.json();
-        const normalizedWeeks = (Array.isArray(data) ? data : [])
-          .map((item) => {
-            const weekNumber = String(item?.weekNumber || "");
-            const numericWeek = Number(weekNumber.replace(/^week_/, ""));
-
-            return {
-              ...item,
-              numericWeek: Number.isNaN(numericWeek) ? null : numericWeek,
-            };
-          })
-          .filter((item) => item.numericWeek !== null)
-          .filter((item) => item.numericWeek >= 1 && item.numericWeek <= 41)
-          .sort((a, b) => a.numericWeek - b.numericWeek)
-          .filter((item, index, array) => array.findIndex((entry) => entry.numericWeek === item.numericWeek) === index);
-
-        setWeeks(normalizedWeeks);
       } catch (error) {
         console.error("Error loading weeks:", error);
-        setWeeks([]);
+        if (!ignore) {
+          setWeeks([]);
+        }
       } finally {
-        setLoading(false);
+        if (!ignore) {
+          setLoading(false);
+        }
       }
     };
 
     loadWeeks();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   useEffect(() => {
