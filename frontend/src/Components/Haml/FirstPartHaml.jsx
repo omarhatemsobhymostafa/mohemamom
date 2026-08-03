@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { loadWeeksData } from "./weeksData";
 
 export default function FirstPartHaml() {
   const location = useLocation();
-  const isDetailPage = location.pathname.includes("/HamlPart1/") && location.pathname.split("/HamlPart1/").length > 1;
   const [weeks, setWeeks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isOpen, setIsOpen] = useState(true);
+  const sliderRef = useRef(null);
+
+  const pathWeek = location.pathname.split("/HamlPart1/").filter(Boolean).pop();
+  const activeWeek = pathWeek && pathWeek !== "HamlPart1" ? pathWeek.replace("week_", "") : null;
 
   useEffect(() => {
     let ignore = false;
@@ -37,45 +40,71 @@ export default function FirstPartHaml() {
     };
   }, []);
 
-  useEffect(() => {
-    if (location.pathname.includes("/HamlPart1/")) {
-      setIsOpen(false);
-    }
-  }, [location.pathname]);
+  const scrollSlider = (direction) => {
+    if (!sliderRef.current) return;
+    sliderRef.current.scrollBy({
+      left: direction === "next" ? 220 : -220,
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <div className="sticky top-0 z-20 rounded-b-[32px] bg-white/90 px-3 py-4 shadow-[0_8px_30px_rgba(117,184,178,0.15)] backdrop-blur-sm sm:px-4">
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-1 sm:px-3">
-        <button
-          type="button"
-          onClick={() => setIsOpen((prev) => !prev)}
-          className="rounded-full bg-[#75b8b2] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#5aa79e] sm:px-5 sm:text-base"
-          aria-expanded={isOpen}
-        >
-          {isOpen ? "إخفاء الأسابيع" : "عرض الأسابيع"}
-        </button>
-
-        <div
-          className={`w-full overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-[60vh] opacity-100" : "max-h-0 opacity-0"}`}
-        >
-          <div className={`mx-auto flex min-w-full max-h-[60vh] flex-col items-stretch justify-start gap-2 overflow-y-auto px-1 pb-2 text-center font-bold text-white sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:px-3 sm:overflow-visible ${isDetailPage ? "sm:justify-center" : "sm:justify-start"}`}>
-            {loading ? (
-              <span className="text-[#75b8b2]">جاري تحميل الأسابيع...</span>
-            ) : (
-              weeks.map((item) => (
-                <Link
-                  key={item.weekNumber}
-                  className="w-full rounded-full bg-[#75b8b2] px-4 py-2.5 text-sm transition hover:bg-[#5aa79e] sm:w-auto sm:px-5 sm:py-3 sm:text-base"
-                  to={`/HamlPart1/${item.weekNumber}`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  الأسبوع {item.weekNumber.replace("week_", "")}
-                </Link>
-              ))
-            )}
+    <section className="mx-auto mb-4 max-w-6xl rounded-[28px] border border-[#f4d7d9] bg-white/90 p-3 shadow-[0_16px_45px_rgba(117,184,178,0.12)] backdrop-blur sm:p-4">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div>
+          <p className="text-sm font-semibold text-[#f28482]">اختاري الأسبوع</p>
           </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => scrollSlider("prev")}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4d7d9] bg-[#fff7f7] text-[#75b8b2] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#fef2f2]"
+            aria-label="السابق"
+          >
+            <FiChevronRight className="text-lg" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollSlider("next")}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#f4d7d9] bg-[#fff7f7] text-[#75b8b2] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#fef2f2]"
+            aria-label="التالي"
+          >
+            <FiChevronLeft className="text-lg" />
+          </button>
         </div>
       </div>
-    </div>
+
+      <div
+        ref={sliderRef}
+        className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {loading ? (
+          <div className="w-full rounded-[20px] bg-[#fef2f2] px-4 py-3 text-center text-sm font-semibold text-[#75b8b2]">
+            جاري تحميل الأسابيع...
+          </div>
+        ) : (
+          weeks.map((item) => {
+            const weekNumber = item.weekNumber.replace("week_", "");
+            const isActive = activeWeek === weekNumber;
+
+            return (
+              <Link
+                key={item.weekNumber}
+                to={`/HamlPart1/${item.weekNumber}`}
+                className={`min-w-[112px] rounded-[20px] px-3 py-3 text-center text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? "bg-[#75b8b2] text-white shadow-lg"
+                    : "bg-[#fef2f2] text-[#4f6766] hover:-translate-y-1 hover:bg-[#fceaea]"
+                }`}
+              >
+                <span className="block text-[11px] opacity-70">الأسبوع</span>
+                <span className="mt-1 block text-base">{weekNumber}</span>
+              </Link>
+            );
+          })
+        )}
+      </div>
+    </section>
   );
 }

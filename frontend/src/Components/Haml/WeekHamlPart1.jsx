@@ -52,17 +52,16 @@ export default function WeekHamlPart1() {
 
   const renderTextBlock = (title, text) => {
     const safeText = String(text || "").trim();
-
     const paragraphs = safeText
       .split(/\n{2,}/)
       .map((paragraph) => paragraph.replace(/\r/g, "").trim())
       .filter(Boolean);
 
     return (
-      <div className="mb-6">
+      <div className="rounded-[24px] border border-[#f4d7d9] bg-white/90 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:p-5">
         <h2 className="mb-3 text-xl font-black text-[#f48a8a] sm:text-2xl">{title}</h2>
 
-        <div className="rounded-[24px] bg-gradient-to-br from-[#75b8b2] to-[#5aa79e] p-4 text-white shadow-[0_12px_30px_rgba(117,184,178,0.25)] sm:p-5">
+        <div className="rounded-[20px] bg-gradient-to-br from-[#75b8b2] to-[#5aa79e] p-4 text-white shadow-[0_10px_25px_rgba(117,184,178,0.2)]">
           {paragraphs.length ? (
             <div className="space-y-3 whitespace-pre-line text-right leading-relaxed">
               {paragraphs.map((paragraph, index) => (
@@ -78,11 +77,11 @@ export default function WeekHamlPart1() {
   };
 
   if (loading) {
-    return <div className="px-4 py-10 text-center">جاري تحميل البيانات...</div>;
+    return <div className="px-4 py-10 text-center text-[#4f6766]">جاري تحميل البيانات...</div>;
   }
 
   if (!weekData) {
-    return <div className="px-4 py-10 text-center">الأسبوع غير موجود</div>;
+    return <div className="px-4 py-10 text-center text-[#4f6766]">الأسبوع غير موجود</div>;
   }
 
   const dynamicBlocks = getDynamicOptionBlocks();
@@ -174,26 +173,32 @@ export default function WeekHamlPart1() {
       <FirstPartHaml />
 
       <div className="mx-auto max-w-6xl px-1 py-5 sm:px-2 lg:px-4">
-        <div className="text-center">
-          <h2 className="text-xl font-black text-[#f48a8a] sm:text-2xl">
-            الأسبوع {weekNumber}
-          </h2>
+        <div className="rounded-[32px] border border-[#f4d7d9] bg-[linear-gradient(135deg,_rgba(255,248,244,0.95),_rgba(240,255,254,0.95))] p-4 shadow-[0_16px_45px_rgba(117,184,178,0.12)] sm:p-6">
+          <div className="text-center">
+            <div className="mb-3 inline-flex items-center rounded-full bg-[#fef2f2] px-3 py-1 text-sm font-semibold text-[#f28482]">
+              الأسبوع {weekNumber}
+            </div>
+          </div>
 
-          <div className="mx-auto mt-4 flex gap-4 justify-center">
+          <div className="mt-5 flex flex-row gap-4 sm:flex-row sm:justify-center">
             {fruitImage ? (
-              <div className="flex justify-center overflow-hidden rounded-full bg-gradient-to-br p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] sm:p-3">
-                <img src={fruitImage} alt={`الفاكهة في الأسبوع ${weekNumber}`} className="aspect-square w-full max-w-[220px] rounded-full object-cover" />
+              <div className="mx-auto flex w-full max-w-[220px] flex-col items-center rounded-[24px] border border-[#f4d7d9] bg-white/80 p-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:mx-0 sm:w-[220px]">
+                <div className="overflow-hidden rounded-full border-4 border-[#fef2f2] p-1">
+                  <img src={fruitImage} alt={`الفاكهة في الأسبوع ${weekNumber}`} className="aspect-square w-full rounded-full object-cover" />
+                </div>
               </div>
             ) : null}
 
             {babyImage ? (
-              <div className="flex justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#fff8f8] to-[#fefefe] p-2 shadow-[0_10px_30px_rgba(0,0,0,0.08)] sm:p-3">
-                <img src={babyImage} alt={`الطفل في الأسبوع ${weekNumber}`} className="aspect-square w-full max-w-[220px] rounded-full object-cover" />
+              <div className="mx-auto flex w-full max-w-[220px] flex-col items-center rounded-[24px] border border-[#f4d7d9] bg-white/80 p-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:mx-0 sm:w-[220px]">
+                <div className="overflow-hidden rounded-full border-4 border-[#fef2f2] p-1">
+                  <img src={babyImage} alt={`الطفل في الأسبوع ${weekNumber}`} className="aspect-square w-full rounded-full object-cover" />
+                </div>
               </div>
             ) : null}
           </div>
 
-          <div className="mx-auto w-full py-5 text-right">
+          <div className="mx-auto mt-6 w-full space-y-4 text-right">
             {renderTextBlock("حجم الجنين", weekData.babySize)}
             {renderTextBlock("ماذا يحدث في جسمي", weekData.WhappenInBody)}
             {renderTextBlock("كيف يبدو طفلي", weekData.babyLooks)}
