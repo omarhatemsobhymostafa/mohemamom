@@ -11,7 +11,7 @@ export default function LearnHome() {
       title: "الثلث الأول",
       weak: "اسبوع 1-12",
       desc: "أهلًا بكِ في الثلث الأول من حملك، من أعراض الحمل المبكرة إلى نمو طفلك وتطورك، ستجدين هنا كل ما تحتاجين إليه.",
-      image: 'https://i.ibb.co/hxsbkJVt/Pregnant-woman-sitting-on-sofa-202608032252.jpg',
+      image: 'https://i.ibb.co/pBSTyQgz/Dont-make-her-eyes-202608032241.jpg',
       link: "/HamlPart1",
       coming: false,
     },
