@@ -77,7 +77,34 @@ export default function WeekHamlPart1() {
   };
 
   if (loading) {
-    return <div className="px-4 py-10 text-center text-[#4f6766]">جاري تحميل البيانات...</div>;
+    return (
+      <div className="rounded-[24px] border border-[#f4d7d9] bg-white/90 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] sm:p-5 animate-pulse">
+        <div className="mb-4 h-8 w-1/2 rounded-lg bg-gray-200"></div>
+
+        <div className="rounded-[20px] bg-gray-100 p-4">
+          <div className="space-y-3">
+            <div className="flex gap-10 w-full justify-center p-4 rounded bg-gray-100 shadow-[0_10px_25px_rgba(117,184,178,0.2)]">
+
+              <div className="h-32 w-32 rounded-full bg-gray-200"> </div>
+              <div className="h-32 w-32 rounded-full bg-gray-200"> </div>
+
+            </div>
+            <div className="space-y-3 rounded-[20px] bg-gray-100 p-4 shadow-[0_10px_25px_rgba(117,184,178,0.2)]">
+              <div className="h-4 w-11/12 rounded bg-gray-200"></div>
+              <div className="h-4 w-10/12 rounded bg-gray-200"></div>
+              <div className="h-4 w-full rounded bg-gray-200"></div>
+              <div className="h-4 w-8/12 rounded bg-gray-200"></div>
+              <div className="h-4 w-11/12 rounded bg-gray-200"></div>
+              <div className="h-4 w-10/12 rounded bg-gray-200"></div>
+              <div className="h-4 w-full rounded bg-gray-200"></div>
+              <div className="h-4 w-8/12 rounded bg-gray-200"></div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (!weekData) {
@@ -172,7 +199,7 @@ export default function WeekHamlPart1() {
     <div className="px-3 py-4 sm:px-4 lg:px-6">
       <FirstPartHaml />
 
-      <div className="mx-auto max-w-6xl px-1 py-5 sm:px-2 lg:px-4">
+      <div className=" mx-auto max-w-6xl px-1 py-5 sm:px-2 lg:px-4">
         <div className="rounded-[32px] border border-[#f4d7d9] bg-[linear-gradient(135deg,_rgba(255,248,244,0.95),_rgba(240,255,254,0.95))] p-4 shadow-[0_16px_45px_rgba(117,184,178,0.12)] sm:p-6">
           <div className="text-center">
             <div className="mb-3 inline-flex items-center rounded-full bg-[#fef2f2] px-3 py-1 text-sm font-semibold text-[#f28482]">

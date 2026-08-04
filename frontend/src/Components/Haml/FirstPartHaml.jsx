@@ -49,7 +49,7 @@ export default function FirstPartHaml() {
   };
 
   return (
-    <section className="mx-auto mb-4 max-w-6xl rounded-[28px] border border-[#f4d7d9] bg-white/90 p-3 shadow-[0_16px_45px_rgba(117,184,178,0.12)] backdrop-blur sm:p-4">
+    <section className=" mx-auto mb-4 max-w-6xl rounded-[28px] border border-[#f4d7d9] bg-white/90 p-3 shadow-[0_16px_45px_rgba(117,184,178,0.12)] backdrop-blur sm:p-4">
       <div className="mb-3 flex items-center justify-between gap-2">
         <div>
           <h1 className="text-sm font-semibold text-[#f28482]"> الحمل اسبوع بأسبوع</h1>
@@ -80,9 +80,17 @@ export default function FirstPartHaml() {
         className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {loading ? (
-          <div className="w-full rounded-[20px] bg-[#fef2f2] px-4 py-3 text-center text-sm font-semibold text-[#75b8b2]">
-            جاري تحميل الأسابيع...
-          </div>
+      <>
+    {Array.from({ length: 8 }).map((_, index) => (
+      <div
+        key={index}
+        className="min-w-[112px] rounded-[20px] bg-gray-100 px-3 py-3 animate-pulse"
+      >
+        <div className="mx-auto h-3 w-12 rounded bg-gray-200"></div>
+        <div className="mx-auto mt-3 h-5 w-8 rounded bg-gray-300"></div>
+      </div>
+    ))}
+  </>
         ) : (
           weeks.map((item) => {
             const weekNumber = item.weekNumber.replace("week_", "");
