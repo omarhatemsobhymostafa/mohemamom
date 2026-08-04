@@ -9,8 +9,8 @@ export default function FirstPartHaml() {
   const [loading, setLoading] = useState(true);
   const sliderRef = useRef(null);
 
-  const pathWeek = location.pathname.split("/HamlPart1/").filter(Boolean).pop();
-  const activeWeek = pathWeek && pathWeek !== "HamlPart1" ? pathWeek.replace("week_", "") : null;
+  const pathWeek = location.pathname.split("/PregnancyWeekByWeek/").filter(Boolean).pop();
+  const activeWeek = pathWeek && pathWeek !== "PregnancyWeekByWeek" ? pathWeek.replace("week_", "") : null;
 
   useEffect(() => {
     let ignore = false;
@@ -52,8 +52,8 @@ export default function FirstPartHaml() {
     <section className="mx-auto mb-4 max-w-6xl rounded-[28px] border border-[#f4d7d9] bg-white/90 p-3 shadow-[0_16px_45px_rgba(117,184,178,0.12)] backdrop-blur sm:p-4">
       <div className="mb-3 flex items-center justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold text-[#f28482]">اختاري الأسبوع</p>
-          </div>
+          <h1 className="text-sm font-semibold text-[#f28482]"> الحمل اسبوع بأسبوع</h1>
+        </div>
 
         <div className="flex items-center gap-2">
           <button
@@ -91,7 +91,7 @@ export default function FirstPartHaml() {
             return (
               <Link
                 key={item.weekNumber}
-                to={`/HamlPart1/${item.weekNumber}`}
+                to={`/PregnancyWeekByWeek/${item.weekNumber}`}
                 className={`min-w-[112px] rounded-[20px] px-3 py-3 text-center text-sm font-bold transition-all duration-300 ${
                   isActive
                     ? "bg-[#75b8b2] text-white shadow-lg"

@@ -15,8 +15,8 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home/>} />
-        <Route path='/HamlPart1' element={<HamlPage />} />
-        <Route path='/HamlPart1/:id' element={<WeekHamlPart1 />} />
+        <Route path='/PregnancyWeekByWeek' element={<HamlPage />} />
+        <Route path='/PregnancyWeekByWeek/:id' element={<WeekHamlPart1 />} />
       </Routes>
 
 

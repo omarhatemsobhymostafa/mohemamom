@@ -12,7 +12,7 @@ export default function LearnHome() {
       weak: "اسبوع 1-12",
       desc: "أهلًا بكِ في الثلث الأول من حملك، من أعراض الحمل المبكرة إلى نمو طفلك وتطورك، ستجدين هنا كل ما تحتاجين إليه.",
       image: 'https://i.ibb.co/pBSTyQgz/Dont-make-her-eyes-202608032241.jpg',
-      link: "/HamlPart1",
+      link: "/PregnancyWeekByWeek",
       coming: false,
     },
     {
@@ -20,7 +20,7 @@ export default function LearnHome() {
       weak: "اسبوع 13-27",
       desc: "أنتِ الآن في الثلث الثاني من الحمل، ونأمل أن تكوني قد تجاوزتِ أسوأ الأعراض، وبدأتِ تلمسين التغييرات الجميلة.",
       image: 'https://i.ibb.co/C5qq7rPD/Zoom-until-face-disappear-202608032251.jpg',
-      link: "/HamlPart1",
+      link: "/PregnancyWeekByWeek",
       coming: false,
     },
     {
@@ -28,7 +28,7 @@ export default function LearnHome() {
       weak: "اسبوع 28-40",
       desc: "أنتِ الآن في الثلث الأخير من الحمل، ولم يتبقَ على ولادتك سوى حوالي 12 أسبوعًا، استمتعي بكل خطوة.",
       image: 'https://i.ibb.co/hxsbkJVt/Pregnant-woman-sitting-on-sofa-202608032252.jpg',
-      link: "/HamlPart1",
+      link: "/PregnancyWeekByWeek",
       coming: false,
     },
   ];

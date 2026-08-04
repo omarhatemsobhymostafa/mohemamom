@@ -5,7 +5,7 @@ import { FiHome, FiCalendar, FiHeart } from "react-icons/fi";
 export default function Nav() {
   const items = [
     { label: "الرئيسية", to: "/", icon: FiHome },
-    { label: "الحمل", to: "/HamlPart1", icon: FiCalendar },
+    { label: "الحمل", to: "/PregnancyWeekByWeek", icon: FiCalendar },
   ];
 
   return (

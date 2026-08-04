@@ -35,7 +35,7 @@ export default function Welcome() {
 
           <div className="mx-auto mt-5 max-w-xl rounded-[24px] bg-gradient-to-r from-[#75b8b2] to-[#4fa39d] p-4 text-white shadow-lg lg:mx-0">
             <Link
-              to="/HamlPart1"
+              to="/PregnancyWeekByWeek"
               className="flex items-center justify-center gap-2 rounded-2xl bg-white/20 px-4 py-3 font-bold transition-all duration-300 hover:scale-[1.02] hover:bg-white/30"
             >
               <FiHeart />
