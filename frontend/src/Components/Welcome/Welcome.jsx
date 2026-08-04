@@ -27,7 +27,7 @@ export default function Welcome() {
     <section className="px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 rounded-[32px] border border-[#f2d7d9] bg-white/80 p-4 shadow-[0_20px_60px_rgba(117,184,178,0.14)] backdrop-blur sm:p-6 lg:flex-row lg:items-center lg:gap-10 lg:p-8">
         <div className="flex-1 text-center lg:text-right">
-          
+
           <p className="text-3xl mt-5 font-black text-[#333333] sm:text-4xl lg:text-5xl">
             انتِ قد الــ
           </p>
@@ -35,6 +35,7 @@ export default function Welcome() {
 
           <div className="mx-auto mt-5 max-w-xl rounded-[24px] bg-gradient-to-r from-[#75b8b2] to-[#4fa39d] p-4 text-white shadow-lg lg:mx-0">
             <Link
+        
               to="/PregnancyWeekByWeek"
               className="flex items-center justify-center gap-2 rounded-2xl bg-white/20 px-4 py-3 font-bold transition-all duration-300 hover:scale-[1.02] hover:bg-white/30"
             >
@@ -52,7 +53,7 @@ export default function Welcome() {
               alt="رسم توضيحي لحمل وطفل"
               className="w-full rounded-[24px] object-cover shadow-lg transition duration-500 hover:scale-[1.01]"
             />
-     
+
           </div>
         </div>
       </div>

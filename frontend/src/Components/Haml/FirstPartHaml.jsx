@@ -8,7 +8,7 @@ export default function FirstPartHaml() {
   const [weeks, setWeeks] = useState([]);
   const [loading, setLoading] = useState(true);
   const sliderRef = useRef(null);
-
+  const weekRefs = useRef({});
   const pathWeek = location.pathname.split("/PregnancyWeekByWeek/").filter(Boolean).pop();
   const activeWeek = pathWeek && pathWeek !== "PregnancyWeekByWeek" ? pathWeek.replace("week_", "") : null;
 
@@ -47,6 +47,24 @@ export default function FirstPartHaml() {
       behavior: "smooth",
     });
   };
+useEffect(() => {
+  if (loading || !activeWeek) return;
+
+  const container = sliderRef.current;
+  const activeElement = weekRefs.current[activeWeek];
+
+  if (!container || !activeElement) return;
+
+  const scrollPosition =
+    activeElement.offsetLeft -
+    container.clientWidth / 2 +
+    activeElement.clientWidth / 2;
+
+  container.scrollTo({
+    left: scrollPosition,
+    behavior: "smooth",
+  });
+}, [loading, activeWeek]);
 
   return (
     <section className=" mx-auto mb-4 max-w-6xl rounded-[28px] border border-[#f4d7d9] bg-white/90 p-3 shadow-[0_16px_45px_rgba(117,184,178,0.12)] backdrop-blur sm:p-4">
@@ -84,7 +102,7 @@ export default function FirstPartHaml() {
     {Array.from({ length: 8 }).map((_, index) => (
       <div
         key={index}
-        className="min-w-[112px] rounded-[20px] bg-gray-100 px-3 py-3 animate-pulse"
+        className="min-w-[112px] rounded-[20px] bg-[#fef2f2] px-3 py-3 animate-pulse"
       >
         <div className="mx-auto h-3 w-12 rounded bg-gray-200"></div>
         <div className="mx-auto mt-3 h-5 w-8 rounded bg-gray-300"></div>

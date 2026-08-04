@@ -31,22 +31,5 @@ const WeeksModel = mongoose.model("Weeks" , weeksSchema)
 
 app.get("/weeksdata" , async(req,res)=>{
     const WeeksData = await WeeksModel.find()
-
-    const normalizedWeeks = WeeksData
-      .map((item) => {
-        const weekNumber = String(item.weekNumber || "")
-        const numericWeek = Number(weekNumber.replace(/^week_/, ""))
-
-        return {
-          ...item.toObject(),
-          numericWeek: Number.isNaN(numericWeek) ? null : numericWeek,
-        }
-      })
-      .filter((item) => item.numericWeek !== null)
-      .filter((item) => item.numericWeek >= 1 && item.numericWeek <= 41)
-      .sort((a, b) => a.numericWeek - b.numericWeek)
-      .filter((item, index, array) => array.findIndex((entry) => entry.numericWeek === item.numericWeek) === index)
-      .map(({ numericWeek, ...rest }) => rest)
-
-    res.json(normalizedWeeks)
+    res.json(weeksData)
 })
